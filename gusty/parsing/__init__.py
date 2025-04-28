@@ -154,9 +154,10 @@ def _get_spec_from_date_params(
     range_params = get_dates_range(start, end)
     for day_date in range_params:
         current_spec = spec.copy()
-        set_nested_value(current_spec, param_names[0], day_date)
+        day_date_str = day_date.strftime('%Y-%m-%d')
+        set_nested_value(current_spec, param_names[0], day_date_str)
         if len(param_names) > 1:
-            set_nested_value(current_spec, param_names[1], day_date)
-        current_spec['task_id'] = f'{old_task_id}_{day_date}'
+            set_nested_value(current_spec, param_names[1], day_date_str)
+        current_spec['task_id'] = f'{old_task_id}_{day_date_str}'
         new_specs.append(current_spec)
     return new_specs
